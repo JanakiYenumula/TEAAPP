@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IntegrityCheck>
+<Validations>
+<Validation name="If policy effective date within reasonable range" stopEvaluation="true" level="Error" mapToResponse="true">
+<Message>Unable to process transaction, user may not proceed.</Message>
+<ErrorCode>10003</ErrorCode>
+<Expression>
+<Method>Not</Method>
+<Expression>
+<Method>Or</Method>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/RequestHeader/Header/RoleCd</Variable>
+<Variable Type="String">Customer</Variable>
+</Expression>
+<Expression>
+<Method>Or</Method>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>DoesNotEqual</Method>
+<Variable Type="XPath" PipelinePacket="Flowinfo">//Flowinfo/Environment</Variable>
+<Variable Type="String">Production</Variable>
+</Expression>
+<Expression>
+<Method>Not</Method>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/RequestHeader/Header/RequestDateTime</Variable>
+<Variable Type="String">59</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+</Expression>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/RequestHeader/Header/RequestDateTime</Variable>
+<Variable Type="String">0</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+</Expression>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Flowinfo">//Flowinfo/Environment</Variable>
+<Variable Type="String">Production</Variable>
+</Expression>
+<Expression>
+<Method>Not</Method>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Common">//Common/CurrentDateTime</Variable>
+<Variable Type="String">59</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Common">//Common/CurrentDateTime</Variable>
+<Variable Type="String">0</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+</Expression>
+</Expression>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>Not</Method>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/RequestHeader/Header/RoleCd</Variable>
+<Variable Type="String">Customer</Variable>
+</Expression>
+</Expression>
+<Expression>
+<Method>Or</Method>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>DoesNotEqual</Method>
+<Variable Type="XPath" PipelinePacket="Flowinfo">//Flowinfo/Environment</Variable>
+<Variable Type="String">Production</Variable>
+</Expression>
+<Expression>
+<Method>Not</Method>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/RequestHeader/Header/RequestDateTime</Variable>
+<Variable Type="String">119</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+</Expression>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/RequestHeader/Header/RequestDateTime</Variable>
+<Variable Type="String">0</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Flowinfo">//Flowinfo/Environment</Variable>
+<Variable Type="String">Production</Variable>
+</Expression>
+<Expression>
+<Method>Not</Method>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Common">//Common/CurrentDateTime</Variable>
+<Variable Type="String">119</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+<Expression>
+<Method>IsPriorThanXDays</Method>
+<Variable Type="XPath" PipelinePacket="Common">//Common/CurrentDateTime</Variable>
+<Variable Type="String">0</Variable>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/ContractTerm/EffectiveDt</Variable>
+</Expression>
+</Expression>
+</Expression>
+</Validation>
+</Validations>
+</IntegrityCheck>
