@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Validations>
+<Validation name="Same Physical and Insured Address for LL Dwelling and LL Condo" stopEvaluation="true" level="Error" mapToResponse="true">
+<Message>Unable to provide Landlord coverage for this location if you plan on residing in any part of the home while also renting a portion out. Please start a Homeowner's quote.</Message>
+<ErrorCode>19001</ErrorCode>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>Or</Method>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/@PolicyTypeCd</Variable>
+<Variable Type="String">com.travelers_LL03</Variable>
+</Expression>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/QuoteContractDetails/QuoteContract/@PolicyTypeCd</Variable>
+<Variable Type="String">com.travelers_LL06</Variable>
+</Expression>
+</Expression>
+<Expression>
+<Method>Or</Method>
+<Expression>
+<Method>IsNotSet</Method>
+<Variable Type="XPath" PipelinePacket="Request">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='InsuredAddress']</Variable>
+</Expression>
+<Expression>
+<Method>And</Method>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="ToUpper">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='InsuredAddress']/Addr1</Variable>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="ToUpper">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='PhysicalRisk']/Addr1</Variable>
+</Expression>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="ToUpper">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='InsuredAddress']/City</Variable>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="ToUpper">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='PhysicalRisk']/City</Variable>
+</Expression>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="ToUpper">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='InsuredAddress']/StateProvCd</Variable>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="ToUpper">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='PhysicalRisk']/StateProvCd</Variable>
+</Expression>
+<Expression>
+<Method>Is</Method>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="Substring" Index="5">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='InsuredAddress']/PostalCode</Variable>
+<Variable Type="XPath" PipelinePacket="Request" Transformation="Substring" Index="5">//EstablishRequest/EstablishInput/Input/Location/Addr[AddrTypeCd='PhysicalRisk']/PostalCode</Variable>
+</Expression>
+</Expression>
+</Expression>
+</Expression>
+</Validation>
+</Validations>
+ 
